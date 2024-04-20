@@ -2,6 +2,7 @@ import React from 'react'
 
 import { Button } from './components/Button'
 import { Counter } from './components/Counter'
+import { TimerComponent } from './components/TimerComponent'
 import { TrackeableComponent } from './components/TrackeableComponent'
 import { useDebounce } from './hooks/useDebounce'
 import { useEvent } from './hooks/useEvent'
@@ -36,6 +37,7 @@ function App (): JSX.Element {
       <br />
       <div style={{ height: '800px' }} />
       <TrackeableComponent />
+      <TimerComponent />
     </>
   )
 }
