@@ -1,0 +1,32 @@
+Short Polling vs Long Pollings vs Web sockets
+
+Short Polling: (TIEMPO REQUEST')
+    Request a una entidad cada intervalos regulares de tiempo (setInterval)
+    Ventajas:
+        - SIMPLE
+        - Compatibilidad (REQUEST HTTP)
+    Desventajas:
+        - Exceso de requests
+        - Latencia
+  
+LONG POLLING
+    - Se establece una conexión HTTP. Se ejecuta si la información que tiene el server es distinta a la última del cliente. Conexión como web socket (pero bajo HTTP) -> 
+
+    Ventajas:
+        Reduce requests
+        RTU (Real time updates)
+
+Web Sockets (ver estado de rider en tiempo real)
+    - Abre una sesión de comunicación interactiva (cliente - servidor)
+
+Ejemplo de Polling:
+    Un sitio web que me informa el valor del dolar (cada 30' con un setInterval -> short polling) hace una request a un servicio / api que me da el valor del dolar
+    
+    Api del CLIMA (short polling que hace una request cada 1hs para ver como está el clima)
+
+Ejemplo de Sockets
+    ¿Dondé está el rider con mi comida?
+    Actualizaciones de tablero
+    Aplicacion que te muestra donde está el mouse de la otra persona
+    Gestion de entradas
+    Google Docs / Sheets
