@@ -1,4 +1,4 @@
-import { renderHook } from '@testing-library/react'
+import { act, renderHook } from '@testing-library/react'
 import { afterEach, describe, expect, it, vi } from 'vitest'
 
 import { useLocalstorage } from '../useLocalStorage'
@@ -12,7 +12,7 @@ describe('useLocalStorage', () => {
     setItemSpy.mockClear()
     localStorage.clear()
   })
-  it('should save item in localStorage', () => {
+  it('should save item in localStorage if initial value !== undefined', () => {
     const fn = vi.fn()
     const { result } = renderHook(() => useLocalstorage('key', fn, 'hola'))
     const [value] = result.current
@@ -28,5 +28,23 @@ describe('useLocalStorage', () => {
     renderHook(() => useLocalstorage('key', errorFn, 'hola'))
     expect(errorFn).toHaveBeenCalledOnce()
     global.localStorage = originalLocalStorage
+  })
+
+  it('should get item from localStorage when initial value is undefined', () => {
+    const fn = vi.fn()
+    renderHook(() => useLocalstorage('key', fn, 'value'))
+    renderHook(() => useLocalstorage('key', fn))
+    expect(getItemSpy).toHaveBeenCalledWith('key')
+  })
+
+  it('should get new value on update', () => {
+    const fn = vi.fn()
+    const { result, rerender } = renderHook(() => useLocalstorage('key', fn, 'value1'))
+    const [_, updateValue] = result.current // eslint-disable-line @typescript-eslint/no-unused-vars
+    act(() => {
+      updateValue('value2')
+    })
+    rerender()
+    expect(result.current[0]).toBe('value2')
   })
 })
