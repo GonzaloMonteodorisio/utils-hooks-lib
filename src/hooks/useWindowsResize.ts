@@ -1,9 +1,9 @@
 // useDynamicRating() -> useWindowsResize + useLayoutEffect
 import * as React from 'react'
 
+import { useDebounce } from '.'
 import { canUseDOM } from './useSafeLayoutEffect'
 import { useThrottle } from './useThrottle'
-import { useDebounce } from '.'
 
 interface UseWindowsResize {
   width: number
@@ -19,8 +19,8 @@ export function useWindowsResize (): UseWindowsResize {
 
   const handleResize = (): void => {
     setWindowsSize({
-        width: window.innerWidth,
-        height: window.innerHeight
+      width: window.innerWidth,
+      height: window.innerHeight
     })
   }
 
