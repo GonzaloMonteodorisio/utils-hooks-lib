@@ -11,7 +11,7 @@ export default defineConfig({
   build: {
     lib: {
       entry: resolve(__dirname, 'src/index.ts'),
-      name: 'lvlup-react-hooks',
+      name: 'goca',
       formats: ['es','umd']
     },
     rollupOptions: {

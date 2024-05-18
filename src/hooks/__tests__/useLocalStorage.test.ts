@@ -31,6 +31,7 @@ describe('useLocalStorage', () => {
   })
 
   it('should get item from localStorage when initial value is undefined', () => {
+    // este falla
     const fn = vi.fn()
     renderHook(() => useLocalstorage('key', fn, 'value'))
     renderHook(() => useLocalstorage('key', fn))

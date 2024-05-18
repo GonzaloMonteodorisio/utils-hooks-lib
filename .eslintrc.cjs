@@ -24,15 +24,16 @@ module.exports = {
         "ecmaVersion": "latest",
         "sourceType": "module"
     },
-    "plugins": [
+    "plugins":[
         "react",
         "simple-import-sort"
     ],
     "ignorePatterns": [".eslintrc.cjs", "vite.config.ts", "tests/*"],
-    "rules": {
+    "rules":  {
         "simple-import-sort/imports": "error",
         "@typescript-eslint/no-explicit-any": "error",
-        // '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_', "ignoreSiblings": false }],
+        '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_', "ignoreSiblings": false }],
         "no-console": "warn",
     },
 }
+
