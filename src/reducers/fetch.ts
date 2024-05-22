@@ -10,7 +10,7 @@ export const initialState: initialStateprops = {
   loading: false
 }
 
-export const fetchReducer = (state: initialStateprops, action: { type: string, payload: { data: string, error: string } }): initialStateprops => {
+export const fetchReducer = <T>(state: initialStateprops, action: { type: string, payload: { data: T, error: string } }): initialStateprops => {
   switch (action.type) {
     case ACTIONS.SET_DATA:
       return {
