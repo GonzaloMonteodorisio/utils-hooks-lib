@@ -17,7 +17,7 @@ useEffect(()=>{
  ```
  # useInterval
  ```
- useInterval(funcion,Time Delay)
+ useInterval(funcion,Time-delay)
  ```
  # useLocalstorage
  ```

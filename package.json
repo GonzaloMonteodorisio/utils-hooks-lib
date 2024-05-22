@@ -1,6 +1,6 @@
 {
   "name": "goca",
-  "version": "0.0.5",
+  "version": "0.0.7",
   "type": "module",
   "main": "./dist/goca.umd.cjs",
   "exports": {
@@ -9,6 +9,15 @@
       "require": "./dist/goca.cjs"
     }
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GonzaloMonteodorisio/utils-hooks-lib"
+  },
+  "keywords": [
+    "utils",
+    "utilidades",
+    "hooks"
+  ],
   "publishConfig": {
     "registry": "https://registry.npmjs.org"
   },
