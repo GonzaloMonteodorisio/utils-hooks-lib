@@ -35,3 +35,7 @@ const {data,loading,error,fetcher} = useAxios({ method: 'get', url:'/endpoint', 
   const [value, updateValue]= useLocalstorage(key,errorHandler)
   updateValue(value to local storage) //the same key
  ```
+ # useDebounce
+ ```
+useDebounce(funcion,deley)
+ ```
