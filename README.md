@@ -10,10 +10,16 @@ npm i goca
  ```
   you want controler where de you ejecute:<br>
  ```
-consy {data,error,loading,fetcher} = useAxios({ method: 'get', url: '/endpoint', enabled: true })
-useEffect(()=>{
-  fetcher()
-},[])
+const {data,loading,error,fetcher} = useAxios({ method: 'get', url:'/endpoint', enabled: false })
+  
+  
+  useEffect(()=>{
+   fetcher({
+      enabled: false,
+      method: "get",
+      url: "https://rickandmortyapi.com/api/character"
+    })
+  },[])
  ```
  # useInterval
  ```

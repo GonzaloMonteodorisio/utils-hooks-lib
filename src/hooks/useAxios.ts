@@ -4,7 +4,7 @@ import { ACTIONS } from '../actions/fetch';
 import { fetchReducer, initialState, type initialStateprops } from '../reducers/fetch';
 import { setCommonHeaders } from '../utils/headers';
 import { useLiveRef } from './useLiveRef';
-import useDeepCompareEffect from 'use-deep-compare-effect'
+import useDeepCompareEffect from 'use-deep-compare-effect';
 interface Dispatch {
   type: string;
   payload: unknown;
@@ -24,9 +24,9 @@ interface Config extends AxiosRequestConfig {
 
 interface UseAxios<T> {
   data: T | null;
-  error: string | null;
+  error: unknown;
   loading: boolean;
-  fetcher?: () => Promise<void>;
+  fetcher?: (_config: Config) => Promise<void>;
 }
 
 function newAbortSignal(timeout: number): AbortSignal {
@@ -52,12 +52,10 @@ export const useAxios = <T>(config: Config): UseAxios<T> => {
     async (config: Config): Promise<void> => {
       const enabled = config.enabled ?? true;
       console.log('enable', enabled);
-      if (!enabled) {
-        return;
-      }
+      if (!enabled) return;
+
       try {
-        console.log('click');
-        const {data } = await instance.request<T>({
+        const { data } = await instance.request<T>({
           ...config,
           method: config.method.toLowerCase() ?? 'get',
           signal: newAbortSignal(1000), // timeout para request
@@ -65,32 +63,46 @@ export const useAxios = <T>(config: Config): UseAxios<T> => {
             ...config.headers,
             ...instance.defaults.headers.common,
           },
-        })
+        });
 
         dispatch({ type: ACTIONS.SET_DATA, payload: { data: data, error: 'null' } });
       } catch (err) {
-        console.log('err', err);
         if (err instanceof AxiosError) {
-          dispatch({ type: ACTIONS.SET_ERROR, payload: { data: 'error', error: 'null' } });
+          dispatch({ type: ACTIONS.SET_ERROR, payload: { data: 'error', error: err } });
         }
       }
     },
     [config, instance],
   );
 
-  //const memoizedConfig = React.useMemo(() => configRef.current, [configRef.current]);
-
+  const fetcher = React.useCallback(
+    async (_config: Config) => {
+      try {
+        const { data } = await instance.request<T>({
+          ...configRef.current,
+          ..._config,
+          params: {
+            ...configRef.current.params,
+            ..._config.params,
+          },
+        });
+        dispatch({ type: ACTIONS.SET_DATA, payload: { data: data, error: 'null' } });
+      } catch (err) {
+        if (err instanceof AxiosError) {
+          dispatch({ type: ACTIONS.SET_ERROR, payload: { data: 'error', error: err } });
+        }
+      }
+    },
+    [configRef],
+  );
 
   useDeepCompareEffect(() => {
-
-    void fetch(configRef.current)
-  }, [configRef.current])
+    void fetch(configRef.current);
+  }, [configRef.current]);
   return {
     data: state.data as T | null,
     error: state.error,
     loading: state.loading,
-    fetcher: async () => {
-      await fetch(configRef.current);
-    },
+    fetcher
   };
 };

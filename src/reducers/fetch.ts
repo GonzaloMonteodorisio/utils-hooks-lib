@@ -1,7 +1,7 @@
 import { ACTIONS } from '../actions/fetch'
 export interface initialStateprops {
   data: unknown
-  error: string
+  error: unknown
   loading: boolean
 }
 export const initialState: initialStateprops = {
@@ -10,7 +10,7 @@ export const initialState: initialStateprops = {
   loading: false
 }
 
-export const fetchReducer = <T>(state: initialStateprops, action: { type: string, payload: { data: T, error: string } }): initialStateprops => {
+export const fetchReducer = <T>(state: initialStateprops, action: { type: string, payload: { data: T, error: unknown} }): initialStateprops => {
   switch (action.type) {
     case ACTIONS.SET_DATA:
       return {

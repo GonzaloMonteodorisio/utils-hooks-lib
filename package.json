@@ -1,6 +1,6 @@
 {
   "name": "goca",
-  "version": "0.0.7",
+  "version": "1.0.2",
   "type": "module",
   "main": "./dist/goca.umd.cjs",
   "exports": {
