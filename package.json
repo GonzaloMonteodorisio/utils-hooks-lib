@@ -1,12 +1,13 @@
 {
   "name": "goca",
-  "version": "1.0.3",
+  "version": "1.0.5",
   "type": "module",
+  "types": "./dist/index.d.ts",
   "main": "./dist/goca.umd.cjs",
   "exports": {
     ".": {
       "import": "./dist/goca.js",
-      "require": "./dist/goca.cjs"
+      "require": "./dist/goca.umd.cjs"
     }
   },
   "repository": {

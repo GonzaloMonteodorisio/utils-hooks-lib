@@ -7,7 +7,7 @@ export interface initialStateprops {
 export const initialState: initialStateprops = {
   data: '',
   error: '',
-  loading: false
+  loading: true
 }
 
 export const fetchReducer = <T>(state: initialStateprops, action: { type: string, payload: { data: T, error: unknown} }): initialStateprops => {
